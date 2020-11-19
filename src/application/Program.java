@@ -1,6 +1,9 @@
 package application;
 
+import java.util.Date;
 import java.util.List;
+
+import javax.swing.JOptionPane;
 
 import model.dao.DaoFactory;
 import model.dao.SellerDao;
@@ -29,6 +32,24 @@ public class Program {
 		for(Seller obj : list) {
 			System.out.println(obj);
 		}
+		
+		System.out.println("\n=== TEST 4: seller insert====");
+		
+		Seller newSeller = new Seller(null, "Greg", "greg@gmail.com", new Date(), 4000.0, department);
+		sellerDao.insert(newSeller);
+		System.out.println("Inserted! New id = "+newSeller.getId());
+		
+		System.out.println("\n=== TEST 5: seller insert====");
+		seller = sellerDao.findById(1);
+		seller.setName("Maria Waine");
+		sellerDao.update(seller);
+		System.out.println("Update completed");
+		
+		System.out.println("\n=== TEST 6: seller delete====");
+		int id = Integer.valueOf(JOptionPane.showInputDialog("Enter id"));
+		sellerDao.deleteById(id);
+		System.out.println("Delete completed");
+		
 	}
 
 }
